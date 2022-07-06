@@ -10,6 +10,9 @@
 // -> continue until there is a winner or all spots are filed
 // if there is a winner return "player x wins" else return draw
 
+//FUNCTIONALITY TO ADD
+//reset method to start new game (probably in end game screen)
+
 class Tictactoe {
     constructor(firstplayer = 'x') {
         this.p1 = firstplayer;
