@@ -47,6 +47,9 @@ td {
      height: 33%;
      
 }
+.block-cursor {
+     pointer-events: none;
+}
 
 /******************************************
 /* LAYOUT

@@ -20,12 +20,18 @@ class Tictactoe {
             [0,0,0],
         ];
         this.currentplayer = firstplayer;
+        this.gameRunning = false;
     }
     
     markBoard(place) {
         //take in where was clicked
+        let cell = document.querySelector(`#${place}`);
         //set current players mark there
+        cell.innerText = this.currentplayer;
         //remove clickablity from spot
+        cell.classList.add('block-cursor')
+
+        //DEBUG
         console.log(place, 'marked!')
     }
     switchPlayers() {
@@ -45,4 +51,9 @@ class Tictactoe {
 let newGame = new Tictactoe();
 
 let boardCells = document.querySelectorAll('td');
-boardCells.forEach(cell => cell.addEventListener('click', () => newGame.markBoard(cell.id), ))
+boardCells.forEach(cell => cell.addEventListener('click', () => {
+    newGame.markBoard(cell.id);
+    let winner = newGame.checkWinner();
+    let draw = newGame.checkDraw();
+    if (!winner && !draw) newGame.switchPlayers()
+}));
