@@ -101,15 +101,27 @@ class Tictactoe {
         if (status === 'draw') message.innerText = 'It\'s a Draw!';
         else message.innerText = `Player ${status.toUpperCase()} Wins!` 
         //unhide modal window
-        let modal = document.querySelector('.modal');
-        modal.classList.remove('hidden');
+        document.querySelector('.modal').classList.remove('hidden');
+    }
+    reset() {
+        //reset player and clear board
+        this.currentplayer = this.p1;
+        this.board = this.board.map(arr => arr.map(item => 0));
+        //remove marks 
+        let cells = document.querySelectorAll('td');
+        cells.forEach(block => {
+            block.innerText = '';
+            block.classList.remove('block-cursor')
+        });
+        //hide modal window
+        document.querySelector('.modal').classList.add('hidden');
     }
 }
 
 let newGame = new Tictactoe();
 
 document.querySelector('.modal_button').addEventListener('click', () => {
-    //reset()
+    newGame.reset()
  })
 let boardCells = document.querySelectorAll('td');
 boardCells.forEach(cell => cell.addEventListener('click', () => {
@@ -117,6 +129,5 @@ boardCells.forEach(cell => cell.addEventListener('click', () => {
     let winner = newGame.checkWinner();
     let draw = newGame.checkDraw();
     if (!winner && !draw) newGame.switchPlayers();
-    else if(winner) {console.log(winner, ' wins!'); newGame.end(winner || draw) }
-    else if (draw) console.log('draw!')
+    else newGame.end(winner || draw);
 }));
