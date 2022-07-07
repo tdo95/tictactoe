@@ -50,6 +50,25 @@ td {
 .block-cursor {
      pointer-events: none;
 }
+.modal {
+     width: 80%;
+     height: 80%;
+     background-color: green;
+     position: fixed;
+     top: 10%;
+     left: 10%;
+     text-align: center;
+}
+.message {
+     font-size: 60px;
+     
+}
+.modal_button {
+     margin: 0 auto;
+}
+.hidden {
+     display: none;
+}
 
 /******************************************
 /* LAYOUT
