@@ -93,7 +93,11 @@ class Tictactoe {
                 if(this.board[i][j] === 0) return false;
             }
         }
-        return true;
+        return 'draw';
+    }
+    endGame(status) {
+        //unhide modal window
+        //display message and play again button
     }
 }
 
