@@ -1,20 +1,4 @@
 
-//LOGIC
-
-//Start game
-// select who goes first
-// first player marks
-// check for winner
-// second player marks
-// check for winner
-// -> continue until there is a winner or all spots are filed
-// if there is a winner return "player x wins" else return draw
-
-//FUNCTIONALITY TO ADD
-//end game method to show modal screen that has a replay option
-//reset method to start new game (probably in end game screen)
-
-
 class Tictactoe {
     constructor(firstplayer = 'X') {
         this.p1 = firstplayer;
@@ -27,12 +11,11 @@ class Tictactoe {
         this.currentplayer = firstplayer;
         this.gameRunning = false;
     }
-    
     markBoard(place) {
         //take in where was clicked
         let cell = document.querySelector(`#${place}`);
         //update color marker
-        this.changeColorMarker(cell);
+        this.changeMarkerColor(cell);
         //set current players mark there
         cell.innerText = this.currentplayer;
         //update board
@@ -40,11 +23,11 @@ class Tictactoe {
         //remove clickablity from spot
         cell.classList.add('block-cursor');
     }
-    changeColorMarker(cell) {
+    changeMarkerColor(cell) {
         let tableClass = document.querySelector('table').classList;
         if (this.currentplayer === this.p1 ) {
             cell.classList.add('x-color');
-            tableClass.remove('x-color')
+            tableClass.remove('x-color');
             tableClass.add('o-color');
         } else {
             cell.classList.add('o-color');
@@ -55,55 +38,47 @@ class Tictactoe {
     switchPlayers() {
         this.currentplayer = this.currentplayer === this.p1 ? this.p2 : this.p1;
     }
-    checkWinner() {
-        let isWinner;
-        let firstValue;
+    checkWinner() {        
         let rows = this.board.length
-        
+        let winner;
         //check horizontal winner
-        for( let i = 0; i < rows; i++) {
-            //check if first value present
-            firstValue = this.board[i][0];
-            if (!firstValue) continue;
-            //check if each value is equal and ignores unset values
-            isWinner = this.board[i].every(value => value === firstValue && value !== 0);
-            if (isWinner) return firstValue;
-        }
-        
+        this.board.some((row, i) => {
+            let firstItem = (row[i] || null);
+            if (row.every(mark => mark === firstItem)) {
+                winner = firstItem;
+                return true;
+            } else return false;
+        });
+        if (winner) return winner;
         //check vertical winner
         nextRow: for (let i = 0; i < rows; i++) {
-            firstValue = this.board[0][i];
-            if (!firstValue) continue nextRow;
-            for (let item = 1; item < rows; item++) {
-                if (this.board[item][i] === firstValue) continue;
-                else continue nextRow;
+            let item;
+            for (item = 0; item < rows - 1; item++) {
+                let current = this.board[item][i];
+                let next = this.board[item + 1][i];
+                if (current === next && !current) continue;
+                else continue nextRow; //skips if items arent the same
             }
-            //if loop finishes all items the same so return winner;
-            return firstValue;   
+            winner = this.board[item][i];
+            return winner;   
         }
-        
         //check diagonal winner
-        let fowardCount = 0;
-        let backwardCount = 0;
-        let fValue = (this.board[0][0] || null);
-        let bValue = (this.board[0][rows - 1] || null);
-        for (let i = 0, j = rows - 1; i < rows; i++, j--) {
+        let diagonal = { f: true, b :true}, fcurrent, fnext, bcurrent, bnext;
+        for (let i = 0, j = rows - 1; i < rows - 1; i++, j--) {
             //foward diagonal
-            if (this.board[i][i] === fValue) fowardCount++;
+            fcurrent = this.board[i][i], fnext = this.board[i + 1][i + 1];
+            if (fcurrent !== fnext || !fcurrent) diagonal.f = false;
             //backwards diagonal
-            if (this.board[i][j] === bValue) backwardCount++; 
+            bcurrent = this.board[i][j], bnext = this.board[i + 1][j - 1];
+            if (bcurrent !== bnext || !bcurrent) diagonal.b = false;
         }
-        if (fowardCount === rows) return fValue;
-        else if(backwardCount === rows) return bValue;  
+        winner = diagonal.f ? fcurrent : diagonal.b ? bcurrent : null;
+        if (winner) return winner; 
     }
     checkDraw() {
         //if missing mark on board return false
-        for(let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board.length; j++) {
-                if(this.board[i][j] === 0) return false;
-            }
-        }
-        return 'draw';
+        let draw = this.board.every(row => row.every(mark => mark));
+        return draw ? 'draw' : false;
     }
     end(status) {
         //update display message
@@ -124,7 +99,7 @@ class Tictactoe {
         let cells = document.querySelectorAll('td');
         cells.forEach(block => {
             block.innerText = '';
-            block.classList.remove('block-cursor','o-color','x-color')
+            block.classList.remove('block-cursor','o-color','x-color');
         });
         //reset table event and color class
         document.querySelector('table').classList.remove('o-color', 'block-cursor');
@@ -138,13 +113,13 @@ class Tictactoe {
 let newGame = new Tictactoe();
 
 document.querySelector('.modal_button').addEventListener('click', () => {
-    newGame.reset()
+    newGame.reset();
  })
 let boardCells = document.querySelectorAll('td');
 boardCells.forEach(cell => {
     //hover effect on boxcells 
     cell.addEventListener('pointerenter', () => {
-        cell.innerText = newGame.currentplayer + 'Hover'
+        cell.innerText = newGame.currentplayer;
     })
     cell.addEventListener('pointerleave', () => {
         //ensures cell mark isnt removed after click event
