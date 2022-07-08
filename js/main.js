@@ -84,7 +84,7 @@ class Tictactoe {
         //update display message
         let message = document.querySelector('.message');
         if (status === 'draw') message.innerText = 'It\'s a Draw!';
-        else message.innerText = `Player ${status.toUpperCase()} Wins!` 
+        else message.innerText = `Player ${status.toUpperCase()} Wins!`; 
         //unhide modal window
         document.querySelector('.modal').classList.remove('close');
         document.querySelector('.modal').classList.add('open');
