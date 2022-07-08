@@ -1,6 +1,6 @@
 # Tic Tac Toe 🅾🆇
 Two player tic tac toe game.
-<br><br>Try it out here: [Link To Live Site]() ✨
+<br><br>Try it out here: [Link To Live Site](https://tdo95.github.io/tictactoe/) ✨
 ###
 <!-- TicTacToe Demo-->
 ![demo](https://github.com/tdo95/tictactoe/blob/main/tictactoe-demo.gif)
