@@ -1,5 +1,5 @@
 # Tic Tac Toe 🅾🆇
-Two player tic tac toe game.
+Online multiplayer tic tac toe game customized with alternating marker colors and modal animations.
 <br><br>Try it out here: [Link To Live Site](https://tdo95.github.io/tictactoe/) ✨
 ###
 <!-- TicTacToe Demo-->
@@ -12,9 +12,11 @@ This project uses object oriented programming as well as front end technologies 
 ## Features 📱
 - Multiplayer Capability
 - Interactive Board interface
+- Modal Animations
+- Alternating Color Markers
 
 ## Lessons Learned 🎖
-- I discovered you can add animations to modal windows using the animation property and keyframes in CSS.
+- An easy way to add animations to modal windows is to use the animation property and keyframes in CSS.
 - Debugging saves time! I learned how to actitivate and utilize debugging tool within chrome dev tools.
 
 ## Future Improvements 📊
