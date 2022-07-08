@@ -112,6 +112,8 @@ class Tictactoe {
         else message.innerText = `Player ${status.toUpperCase()} Wins!` 
         //unhide modal window
         document.querySelector('.modal').classList.remove('hidden');
+        //block click events on table
+        document.querySelector('table').classList.add('block-cursor');
     }
     reset() {
         //reset player and clear board
@@ -123,8 +125,8 @@ class Tictactoe {
             block.innerText = '';
             block.classList.remove('block-cursor','o-color','x-color')
         });
-        //reset table color class
-        document.querySelector('table').classList.remove('o-color');
+        //reset table event and color class
+        document.querySelector('table').classList.remove('o-color', 'block-cursor');
         document.querySelector('table').classList.add('x-color');
         //hide modal window
         document.querySelector('.modal').classList.add('hidden');
