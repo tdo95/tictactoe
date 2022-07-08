@@ -21,15 +21,21 @@
 /* BASE STYLES
 /*******************************************/
 
+/* #2E4756  #B6CBD9 */
+
 body {
      height: 100vh;
+     background-color: #2E4756;
+     color: whitesmoke;
+     font-family: Arial, Helvetica, sans-serif;
 }
 h1, footer {
      text-align: center;
      
 }
 table {
-     border: 2px black solid;
+     /* border: 1px black solid; */
+     /* background-color: white; */
      
      width: 60%;
      height: 80%;
@@ -37,14 +43,19 @@ table {
      max-height: 1000px;
 
      margin: 0 auto;
+     color: #2E4756;
      
      
 }
 td {
-     border: 2px black solid;
+     /* border: 1px #2E4756 solid; */
+     background-color: black;
+     box-shadow: 5px 5px 15px rgba(0, 0, 0, .5);
 
      width: 33%;
      height: 33%;
+
+     /* border-radius: 10px; */
      
 }
 .block-cursor {
@@ -69,7 +80,21 @@ td {
 .hidden {
      display: none;
 }
-
+footer a {
+     color: #E6E2D3;
+     text-decoration: none;
+     border-bottom: .5px solid #E6E2D3;
+}
+footer a:hover {
+     color: black;
+     border-bottom: .5px solid black;
+}
+.x-color {
+     color: #2E4756;
+}
+.o-color {
+     color: whitesmoke;
+}
 /******************************************
 /* LAYOUT
 /*******************************************/

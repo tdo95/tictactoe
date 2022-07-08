@@ -16,9 +16,9 @@
 
 
 class Tictactoe {
-    constructor(firstplayer = 'x') {
+    constructor(firstplayer = 'X') {
         this.p1 = firstplayer;
-        this.p2 = firstplayer === 'x' ? 'o' : 'x';
+        this.p2 = firstplayer === 'X' ? 'O' : 'X';
         this.board = [
             [0,0,0],
             [0,0,0],
@@ -31,16 +31,26 @@ class Tictactoe {
     markBoard(place) {
         //take in where was clicked
         let cell = document.querySelector(`#${place}`);
+        //update color marker
+        this.changeColorMarker(cell);
         //set current players mark there
         cell.innerText = this.currentplayer;
         //update board
         this.board[place[1]][place[2]] = this.currentplayer;
         //remove clickablity from spot
         cell.classList.add('block-cursor');
-
-        //DEBUG
-        console.log(this.board);
-        console.log(place, 'marked!')
+    }
+    changeColorMarker(cell) {
+        let tableClass = document.querySelector('table').classList;
+        if (this.currentplayer === this.p1 ) {
+            cell.classList.add('x-color');
+            tableClass.remove('x-color')
+            tableClass.add('o-color');
+        } else {
+            cell.classList.add('o-color');
+            tableClass.remove('o-color');
+            tableClass.add('x-color');
+        }
     }
     switchPlayers() {
         this.currentplayer = this.currentplayer === this.p1 ? this.p2 : this.p1;
@@ -111,8 +121,11 @@ class Tictactoe {
         let cells = document.querySelectorAll('td');
         cells.forEach(block => {
             block.innerText = '';
-            block.classList.remove('block-cursor')
+            block.classList.remove('block-cursor','o-color','x-color')
         });
+        //reset table color class
+        document.querySelector('table').classList.remove('o-color');
+        document.querySelector('table').classList.add('x-color');
         //hide modal window
         document.querySelector('.modal').classList.add('hidden');
     }
@@ -124,10 +137,21 @@ document.querySelector('.modal_button').addEventListener('click', () => {
     newGame.reset()
  })
 let boardCells = document.querySelectorAll('td');
-boardCells.forEach(cell => cell.addEventListener('click', () => {
-    newGame.markBoard(cell.id);
-    let winner = newGame.checkWinner();
-    let draw = newGame.checkDraw();
-    if (!winner && !draw) newGame.switchPlayers();
-    else newGame.end(winner || draw);
-}));
+boardCells.forEach(cell => {
+    //hover effect on boxcells 
+    cell.addEventListener('pointerenter', () => {
+        cell.innerText = newGame.currentplayer + 'Hover'
+    })
+    cell.addEventListener('pointerleave', () => {
+        //ensures cell mark isnt removed after click event
+        if (cell.classList.contains('block-cursor')) return;
+        cell.innerText = ''
+    })
+    cell.addEventListener('click', () => {
+        newGame.markBoard(cell.id);
+        let winner = newGame.checkWinner();
+        let draw = newGame.checkDraw();
+        if (!winner && !draw) newGame.switchPlayers();
+        else newGame.end(winner || draw);
+    });
+});
