@@ -56,7 +56,7 @@ class Tictactoe {
             for (item = 0; item < rows - 1; item++) {
                 let current = this.board[item][i];
                 let next = this.board[item + 1][i];
-                if (current === next || !current) continue;
+                if (current === next && current) continue;
                 else continue nextRow; //skips if items arent the same
             }
             winner = this.board[item][i];
