@@ -111,7 +111,8 @@ class Tictactoe {
         if (status === 'draw') message.innerText = 'It\'s a Draw!';
         else message.innerText = `Player ${status.toUpperCase()} Wins!` 
         //unhide modal window
-        document.querySelector('.modal').classList.remove('hidden');
+        document.querySelector('.modal').classList.remove('close');
+        document.querySelector('.modal').classList.add('open');
         //block click events on table
         document.querySelector('table').classList.add('block-cursor');
     }
@@ -129,7 +130,8 @@ class Tictactoe {
         document.querySelector('table').classList.remove('o-color', 'block-cursor');
         document.querySelector('table').classList.add('x-color');
         //hide modal window
-        document.querySelector('.modal').classList.add('hidden');
+        document.querySelector('.modal').classList.remove('open');
+        document.querySelector('.modal').classList.add('close');
     }
 }
 
