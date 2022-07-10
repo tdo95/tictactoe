@@ -1,5 +1,5 @@
 # Tic Tac Toe 🅾🆇
-Online two player tic tac toe game customized with alternating marker colors and modal animations.
+Online two-player tic tac toe game customized with alternating marker colors and modal animations.
 <br><br>Try it out here: [Link To Live Site](https://tdo95.github.io/tictactoe/) ✨
 ###
 <!-- TicTacToe Demo-->
